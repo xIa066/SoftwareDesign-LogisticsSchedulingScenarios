@@ -27,6 +27,7 @@ public class Robot {
     private MailItem deliveryItem;
     
     private int deliveryCounter;
+    private final int MAXIMUN_WEIGHT = 2000;
     
 
     /**
@@ -46,7 +47,7 @@ public class Robot {
         this.mailPool = mailPool;
         this.receivedDispatch = false;
         this.deliveryCounter = 0;
-        strong = true;
+        this.strong = true;
     }
     
     public void changeToWeak() { strong = false; }
@@ -128,11 +129,14 @@ public class Robot {
     private void setRoute() throws ItemTooHeavyException{
         /** Pop the item from the StorageUnit */
         deliveryItem = tube.pop();
-        if (checkWeight(deliveryItem)) throw new ItemTooHeavyException();
+        if (!isStrong()&&deliveryItem.weight > MAXIMUN_WEIGHT) throw new ItemTooHeavyException();
         /** Set the destination floor */
         destination_floor = deliveryItem.getDestFloor();
     }
 
+    public void setCurrentFloor(int floor) {
+		current_floor = floor;
+	}
     /**
      * Generic function that moves the robot towards the destination
      * @param destination the floor towards which the robot is moving
@@ -178,5 +182,10 @@ public class Robot {
 		Integer hash = hashMap.get(hash0);
 		if (hash == null) { hash = count++; hashMap.put(hash0, hash); }
 		return hash;
+	}
+
+	public int getCurrentFloor() {
+		// TODO Auto-generated method stub
+		return current_floor;
 	}
 }
