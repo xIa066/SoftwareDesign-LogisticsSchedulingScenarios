@@ -24,6 +24,7 @@ public class Robot {
     private IMailPool mailPool;
     private boolean receivedDispatch;
     private boolean strong;
+    private boolean careful;
     private MailItem deliveryItem;
     
     private int deliveryCounter;
@@ -48,11 +49,18 @@ public class Robot {
         this.receivedDispatch = false;
         this.deliveryCounter = 0;
         this.strong = true;
+        this.careful = false;
     }
     
     public void changeToWeak() { strong = false; }
     
+    public void changeToCareful() {
+		careful = true;
+	}
+    
     public Boolean isStrong() { return strong; }
+    
+    public Boolean isCareful() { return careful; }
     
     public void dispatch() {
     	receivedDispatch = true;

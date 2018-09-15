@@ -14,6 +14,7 @@ public class CarefulRobot extends Robot {
 		super(delivery, mailPool);
 		tube = new StorageTube(MAXIMUM_CAPACITY);
 		currentState = MoveState.Stay;
+		changeToCareful();
 	}
 	
 	@Override
