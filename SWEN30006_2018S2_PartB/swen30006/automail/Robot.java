@@ -137,7 +137,7 @@ public class Robot {
     private void setRoute() throws ItemTooHeavyException{
         /** Pop the item from the StorageUnit */
         deliveryItem = tube.pop();
-        if (!isStrong()&&deliveryItem.weight > MAXIMUN_WEIGHT) throw new ItemTooHeavyException();
+        if (checkWeight(deliveryItem)) throw new ItemTooHeavyException();
         /** Set the destination floor */
         destination_floor = deliveryItem.getDestFloor();
     }

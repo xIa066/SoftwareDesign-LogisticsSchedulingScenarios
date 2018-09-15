@@ -1,8 +1,7 @@
 package strategies;
 
-import java.util.Iterator;
+
 import java.util.List;
-import java.util.ListIterator;
 
 import automail.IMailDelivery;
 import automail.Robot;
@@ -22,10 +21,7 @@ public class Automail {
     	/** Initialize the MailPool */
     	
     	this.mailPool = mailPool;
-    	
-        /** Initialize the RobotAction */
-    	boolean weak = false;  // Can't handle more than 2000 grams
-    	boolean strong = true; // Can handle any weight that arrives at the building
+    
     	
     	/** Initialize robots */
     	System.out.println(robotTypes);
