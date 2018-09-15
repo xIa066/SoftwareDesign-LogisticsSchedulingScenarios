@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class Simulation {
 
-	private enum RobotType { Big, Careful, Standard, Weak };
+	public enum RobotType { Big, Careful, Standard, Weak };
 	
 	
     /** Constant for the mail generator */
