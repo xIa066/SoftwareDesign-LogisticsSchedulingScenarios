@@ -28,7 +28,6 @@ public class Robot {
     private MailItem deliveryItem;
     
     private int deliveryCounter;
-    private final int MAXIMUN_WEIGHT = 2000;
     
 
     /**

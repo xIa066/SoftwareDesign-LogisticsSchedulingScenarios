@@ -82,12 +82,10 @@ public class MyMailPool implements IMailPool {
 		StorageTube tube = robot.getTube();
 		StorageTube temp = new StorageTube(tube.getCapacity());
 		try { // Get as many items as available or as fit
-			if (robot.isCareful()) {
-				while (temp.getSize() != 0 && !fragilePool.isEmpty()) {
-					Item item = fragilePool.remove();
-					temp.addItem(item.mailItem);
-				}
-			}else if (robot.isStrong()) {
+			if (robot.isCareful() && !fragilePool.isEmpty()) {
+				Item item = fragilePool.remove();
+				temp.addItem(item.mailItem);
+			}else if (robot.isStrong() || robot.isCareful() && fragilePool.isEmpty()) {
 				while(temp.getSize() < tube.getCapacity() && !nonFragilePool.isEmpty() ) {
 					Item item = nonFragilePool.remove();
 					if (!item.heavy) lightCount--;
