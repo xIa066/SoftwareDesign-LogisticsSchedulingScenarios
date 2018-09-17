@@ -14,6 +14,7 @@ public class Automail {
 	      
     private Robot[] robot;
     public IMailPool mailPool;
+    
     public Robot getRobotByIndex(int index) {
 		return robot[index];
 	}
