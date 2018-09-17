@@ -85,7 +85,7 @@ public class MyMailPool implements IMailPool {
 			if (robot.isCareful() && !fragilePool.isEmpty()) {
 				Item item = fragilePool.remove();
 				temp.addItem(item.mailItem);
-			}else if (robot.isStrong() || robot.isCareful() && fragilePool.isEmpty()) {
+			}else if (robot.isStrong()) {
 				while(temp.getSize() < tube.getCapacity() && !nonFragilePool.isEmpty() ) {
 					Item item = nonFragilePool.remove();
 					if (!item.heavy) lightCount--;
@@ -114,9 +114,9 @@ public class MyMailPool implements IMailPool {
 
 	@Override
 	public void registerWaiting(Robot robot) { // assumes won't be there
-		if (robot.isStrong()) {
+		if (robot.isCareful() && fragilePool.size() > 0) {
 			robots.add(robot); 
-		} else if (robot.isCareful() && fragilePool.size() > 0) {
+		} else if (robot.isStrong() ) {
 			robots.add(robot);
 		} else {
 			robots.addLast(robot); // weak robot last as want more efficient delivery with highest priorities

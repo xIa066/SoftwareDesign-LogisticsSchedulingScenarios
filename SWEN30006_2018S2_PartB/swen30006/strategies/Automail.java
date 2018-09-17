@@ -12,9 +12,11 @@ import automail.*;
 
 public class Automail {
 	      
-    public Robot[] robot;
+    private Robot[] robot;
     public IMailPool mailPool;
-    
+    public Robot getRobotByIndex(int index) {
+		return robot[index];
+	}
     public Automail(IMailPool mailPool, IMailDelivery delivery, List<automail.Simulation.RobotType> robotTypes) {
     	// Swap between simple provided strategies and your strategies here
     	    	
