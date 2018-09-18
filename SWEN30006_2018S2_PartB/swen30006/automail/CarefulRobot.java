@@ -39,9 +39,6 @@ public class CarefulRobot extends Robot {
 			case Stay:
 				currentState = MoveState.Move;
 				break;
-			default:
-				currentState = MoveState.Move;
-				break;
 		}
 	}		
 }
