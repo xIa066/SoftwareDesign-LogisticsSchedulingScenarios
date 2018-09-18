@@ -60,6 +60,7 @@ public class MyMailPool implements IMailPool {
 		robots = new LinkedList<Robot>();
 	}
 
+	// add item to pool separately
 	public void addToPool(MailItem mailItem) {
 		Item item = new Item(mailItem);
 		if (item.fragile) {
@@ -77,15 +78,16 @@ public class MyMailPool implements IMailPool {
 		for (Robot robot: (Iterable<Robot>) robots::iterator) { fillStorageTube(robot); }
 	}
 	
-		
 	private void fillStorageTube(Robot robot) throws FragileItemBrokenException {
 		StorageTube tube = robot.getTube();
 		StorageTube temp = new StorageTube(tube.getCapacity());
 		try { // Get as many items as available or as fit
+			// for careful robots just add a fragile item if there are some fragile items
 			if (robot.isCareful() && !fragilePool.isEmpty()) {
 				Item item = fragilePool.remove();
 				temp.addItem(item.mailItem);
-			}else if (robot.isStrong()) {
+			} // for robots which don't have weight limits add items til tube is full
+			else if (robot.isStrong()) {
 				while(temp.getSize() < tube.getCapacity() && !nonFragilePool.isEmpty() ) {
 					Item item = nonFragilePool.remove();
 					if (!item.heavy) lightCount--;
