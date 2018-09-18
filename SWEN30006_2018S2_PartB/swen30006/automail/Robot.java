@@ -2,6 +2,7 @@ package automail;
 
 import exceptions.ExcessiveDeliveryException;
 import exceptions.ItemTooHeavyException;
+import jdk.internal.org.objectweb.asm.util.CheckAnnotationAdapter;
 import exceptions.FragileItemBrokenException;
 import strategies.IMailPool;
 import java.util.Map;
@@ -40,32 +41,43 @@ public class Robot {
      */
     public Robot(IMailDelivery delivery, IMailPool mailPool){
     	id = "R" + hashCode();
-        // current_state = RobotState.WAITING;
     	current_state = RobotState.RETURNING;
         current_floor = Building.MAILROOM_LOCATION;
         this.delivery = delivery;
         this.mailPool = mailPool;
         this.receivedDispatch = false;
         this.deliveryCounter = 0;
-        this.strong = true;
-        this.careful = false;
+        this.strong = true;//default set to strong type, can be changed in different robot classes
+        this.careful = false;//default set to not careful type, can be changed in different robot classes
     }
     
-    public void changeToWeak() { strong = false; }
+    //change strong robot to weak
+    public void changeToWeak() {
+    	strong = false; 
+    }
     
+    //change not careful robot to careful
     public void changeToCareful() {
 		careful = true;
 	}
     
-    public Boolean isStrong() { return strong; }
+    //check if a robot is strong or not
+    public Boolean isStrong() { 
+    	return strong; 
+    }
     
-    public Boolean isCareful() { return careful; }
+    //check if a robot is careful or not
+    public Boolean isCareful() {
+    	return careful;
+    }
     
     public void dispatch() {
     	receivedDispatch = true;
     }
     
-    public MailItem getDeliveryItem() { return deliveryItem; }
+    public MailItem getDeliveryItem() {
+    	return deliveryItem; 
+    }
 
     /**
      * This is called on every time step
@@ -125,7 +137,8 @@ public class Robot {
     	}
     }
     
-    
+    //will return false for strong robot since they can carry items of any weight
+    //weak robots can override the function to check if they can carry the item
     public Boolean checkWeight(MailItem deliveryItem) {
     	return false;
     }
@@ -141,6 +154,7 @@ public class Robot {
         destination_floor = deliveryItem.getDestFloor();
     }
 
+    //setter for current_floor
     public void setCurrentFloor(int floor) {
 		current_floor = floor;
 	}
@@ -191,6 +205,7 @@ public class Robot {
 		return hash;
 	}
 
+	//getter for current_floor
 	public int getCurrentFloor() {
 		// TODO Auto-generated method stub
 		return current_floor;

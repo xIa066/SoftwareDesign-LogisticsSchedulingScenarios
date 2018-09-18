@@ -34,7 +34,6 @@ public class Simulation {
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
     	Properties automailProperties = new Properties();
 		// Default properties
-    	// automailProperties.setProperty("Robots", "Big,Careful,Standard,Weak");
     	automailProperties.setProperty("Robots", "Standard");
     	automailProperties.setProperty("MailPool", "strategies.SimpleMailPool");
     	automailProperties.setProperty("Floors", "10");
@@ -93,7 +92,7 @@ public class Simulation {
         }
         Integer seed = seedMap.get(true);
         System.out.printf("Seed: %s%n", seed == null ? "null" : seed.toString());
-        Automail automail = new Automail(mailPool, new ReportDelivery(), robotTypes);
+        Automail automail = new Automail(mailPool, new ReportDelivery(), robotTypes);//add param robotTypes to add support for using property to set robots
         MailGenerator mailGenerator = new MailGenerator(MAIL_TO_CREATE, automail.mailPool, seedMap, fragile);
         
         /** Initiate all the mail */
@@ -104,7 +103,7 @@ public class Simulation {
             /* priority = */ mailGenerator.step();
             try {
                 automail.mailPool.step();
-				for (int i=0; i<robotTypes.size(); i++) automail.getRobotByIndex(i).step();
+				for (int i=0; i<robotTypes.size(); i++) automail.getRobotByIndex(i).step();//number of robots is now changeable
 			} catch (ExcessiveDeliveryException|ItemTooHeavyException|FragileItemBrokenException e) {
 				e.printStackTrace();
 				System.out.println("Simulation unable to complete.");

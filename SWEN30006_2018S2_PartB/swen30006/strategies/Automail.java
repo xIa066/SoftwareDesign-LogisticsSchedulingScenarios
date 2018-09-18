@@ -15,9 +15,12 @@ public class Automail {
     private Robot[] robot;
     public IMailPool mailPool;
     
+    //get robot by index
     public Robot getRobotByIndex(int index) {
 		return robot[index];
-	}
+	}	
+    
+    //add param robotTypes, it reads from property and use it to set the simulation robots
     public Automail(IMailPool mailPool, IMailDelivery delivery, List<automail.Simulation.RobotType> robotTypes) {
     	// Swap between simple provided strategies and your strategies here
     	    	
@@ -27,10 +30,8 @@ public class Automail {
     
     	
     	/** Initialize robots */
-    	System.out.println(robotTypes);
-    	System.out.println(robotTypes.size());
-    	
-    	robot = new Robot[robotTypes.size()];
+    	//use different constructors for different types of robots
+      	robot = new Robot[robotTypes.size()];
     	int count = 0;
     	for(RobotType robotType : robotTypes) {
     		switch (robotType) {
@@ -47,13 +48,7 @@ public class Automail {
 				robot[count++] = new StandardRobot(delivery, mailPool);
 				break;
 			}
-    		//robot[count++] = new Robot(delivery, mailPool, robotType.toString());
     	}
-
-    	
-//    	robot[0] = new Robot(delivery, mailPool, weak);
-//    	robot[1] = new Robot(delivery, mailPool, strong);
-//    	robot[2] = new Robot(delivery, mailPool, strong);
     }
     
 }

@@ -2,8 +2,10 @@ package automail;
 
 import strategies.IMailPool;
 
+//Careful robot extends robot class with a tube size of 3 and it is a strong and careful robot with a different movement strategy
 public class CarefulRobot extends Robot {
 	
+	//two states to simulate two steps
 	private enum MoveState {Move, Stay}
 	private MoveState currentState;
 	
@@ -18,6 +20,8 @@ public class CarefulRobot extends Robot {
 	}
 	
 	@Override
+	//first step:not move
+	//second step:move
 	public void moveTowards(int destination) {
 		int current_floor = getCurrentFloor();
 		switch (currentState){
