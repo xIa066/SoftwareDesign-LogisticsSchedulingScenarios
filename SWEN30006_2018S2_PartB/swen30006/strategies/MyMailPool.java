@@ -54,6 +54,7 @@ public class MyMailPool implements IMailPool {
 
 	public MyMailPool(){
 		// Start empty
+		//use two pools to seperately store fragile and not fragile mailItems
 		fragilePool = new LinkedList<Item>();
 		nonFragilePool = new LinkedList<Item>();
 		lightCount = 0;
